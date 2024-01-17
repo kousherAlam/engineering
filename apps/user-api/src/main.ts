@@ -1,4 +1,4 @@
-import { LoggerService, WINSTON_MODULE_NEST_PROVIDER } from '@libs/logger';
+import { LoggerModule, LoggerService, WINSTON_MODULE_NEST_PROVIDER } from '@libs/logger';
 import { StandardizeResponseInterceptor } from '@libs/std';
 import { VersioningType } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -14,7 +14,7 @@ async function bootstrap() {
     bufferLogs: false,
     autoFlushLogs: false,
     forceCloseConnections: true,
-    logger: false,
+    logger: LoggerModule.createLogger({ AppName: '', NODE_ENV: 'prod' })
   });
   const config = app.get(ConfigService<EnvironmentVariables>);
   const prefix = config.get('API_PREFIX');

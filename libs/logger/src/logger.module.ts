@@ -46,4 +46,8 @@ export class LoggerModule {
       exports: [LoggerService, LOGS_MODULE_OPTIONS],
     };
   }
+
+  static createLogger(options: ILoggersModuleProp) {
+    return WinstonModule.createLogger(getWinstonLogOptions(options));
+  }
 }
