@@ -20,6 +20,7 @@ export class UsersService {
     const user = await this.userModel.create({
       name: createUserDto.name,
       email: createUserDto.email,
+      userID: crypto.randomUUID(),
     });
     await this.cacheManager.del(this.request.url);
     return { name: user.name, email: user.email, userID: user.userID };
@@ -55,6 +56,7 @@ export class UsersService {
     if (deleted.deletedCount === 0) {
       throw new HttpException('Not deleted', HttpStatus.NOT_FOUND);
     }
+    await this.cacheManager.del(this.request.url);
     await this.cacheManager.del(this.request.url.replace(`/${id}`, ''));
     return { userID: id };
   }

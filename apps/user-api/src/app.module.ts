@@ -32,7 +32,7 @@ import { ZodValidationPipe } from 'nestjs-zod';
           // url: `local:redis:6379`,
           username: redisConfig.REDIS_USER ?? undefined,
           password: redisConfig.REDIS_PASSWORD ?? undefined,
-          ttl: 60 * 10,
+          ttl: 60 * 60 * 24, // 24 hour of caching in seconds
         });
 
         return {
