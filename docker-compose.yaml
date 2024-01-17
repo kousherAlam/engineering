@@ -1,0 +1,44 @@
+## profiles: ["db"]
+# docker-compose up service1 service2 ...n
+# docker-compose up - run all service
+
+services:
+  mongodb:
+    image: mongo:7.0.1-jammy
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_DATABASE: users
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./mongo:/data/db
+    networks:
+      - backend
+  redis:
+    image: redis:7.0-alpine3.18
+    restart: always
+    ports:
+      - '6379:6379'
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes: 
+      - ./cache:/data
+    networks:
+      - backend
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+      - HTTP_USER=root
+      - HTTP_PASSWORD=qwerty
+    depends_on:
+      - redis
+    ports:
+      - 8081:8081
+    networks:
+      - backend
+
+networks:
+  backend: 
+    driver: bridge
