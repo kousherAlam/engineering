@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-api-deployment
+  labels:
+    app: userapi
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: userapi
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: userapi
+    spec:
+      restartPolicy: Always
+      containers:
+        - image: backend-engineer_user-api
+          name: userapi-service
+          ports:
+            - containerPort: 9000
+          env:
+            - name: NODE_ENV
+              value: "prod"
+            - name: PORT
+              value: "9000"
+            - name: NAME
+              value: "UserAPI"
+            - name: MONGODB_HOST
+              value: "mongodb:27017"
+            - name: MONGODB_DBNAME
+              value: "users"
+            - name: MONGODB_USER
+              value: "user"
+            - name: MONGODB_PASSWORD
+              value: "password"
+            - name: SWAGGER_PATH
+              value: "swagger"
+            - name: API_PREFIX
+              value: "api"
+            - name: REDIS_HOST
+              value: "redis"
+            - name: REDIS_PORT
+              value: "6379"

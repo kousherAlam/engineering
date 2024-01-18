@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deployment
+  labels:
+    app: worker
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: worker
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      restartPolicy: Always
+      containers:
+        - image: backend-engineer_worker
+          name: worker-service
+          ports:
+            - containerPort: 9000
+          env:
+            - name: MONGODB_HOST
+              value: "mongodb:27017"
+            - name: MONGODB_DBNAME
+              value: "users"
+            - name: MONGODB_USER
+              value: "user"
+            - name: MONGODB_PASSWORD
+              value: "password"

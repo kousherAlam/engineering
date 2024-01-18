@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+  labels:
+    app: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: user
+            - name: MONGO_INITDB_DATABASE
+              value: users
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: password
+          image: mongo:7.0.1-jammy
+          name: mongodb-database
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongodata
+              subPath: mongodb
+      restartPolicy: Always
+      volumes:
+        - name: mongodata
+          persistentVolumeClaim:
+            claimName: mongodata
