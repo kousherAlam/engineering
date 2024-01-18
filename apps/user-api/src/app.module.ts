@@ -46,10 +46,10 @@ import { ZodValidationPipe } from 'nestjs-zod';
       useFactory: async (config: ConfigService<EnvironmentVariables>) => {
         const dbConfig = config.get('DATABASE', { infer: true });
         return {
-          uri: `mongodb://${dbConfig.HOST_URL}`,
-          user: dbConfig.DB_USER,
-          pass: dbConfig.PASSWORD,
-          dbName: dbConfig.DB_NAME,
+          uri: `mongodb://${dbConfig.MONGODB_HOST}`,
+          user: dbConfig.MONGODB_USER,
+          pass: dbConfig.MONGODB_PASSWORD,
+          dbName: dbConfig.MONGODB_DBNAME,
           retryAttempts: 5,
           retryDelay: 1000,
         };
