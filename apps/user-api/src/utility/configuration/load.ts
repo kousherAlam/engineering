@@ -13,10 +13,10 @@ export default () => {
     VERSION: pack.version,
     DESCRIPTION: pack.description,
     DATABASE: {
-      HOST_URL: process.env.HOST_URL,
-      DB_NAME: process.env.DB_NAME,
-      DB_USER: process.env.DB_USER,
-      PASSWORD: process.env.PASSWORD,
+      MONGODB_HOST: process.env.MONGODB_HOST,
+      MONGODB_DBNAME: process.env.MONGODB_DBNAME,
+      MONGODB_USER: process.env.MONGODB_USER,
+      MONGODB_PASSWORD: process.env.MONGODB_PASSWORD,
     },
     REDIS: {
       REDIS_HOST: process.env.REDIS_HOST,

@@ -22,23 +22,23 @@ func GetConfig() AppConfig {
 	viper.ReadInConfig()
 
 	var config = AppConfig{
-		DbName:     os.Getenv("DB_NAME"),
-		DbUser:     os.Getenv("DB_USER"),
-		DbPassword: os.Getenv("PASSWORD"),
-		DbHost:     os.Getenv("DB_HOST"),
+		DbName:     os.Getenv("MONGODB_DBNAME"),
+		DbUser:     os.Getenv("MONGODB_USER"),
+		DbPassword: os.Getenv("MONGODB_PASSWORD"),
+		DbHost:     os.Getenv("MONGODB_HOST"),
 	}
 
-	if viper.Get("DB_NAME") != nil {
-		config.DbName = viper.GetString("DB_NAME")
+	if viper.Get("MONGODB_DBNAME") != nil {
+		config.DbName = viper.GetString("MONGODB_DBNAME")
 	}
-	if viper.Get("DB_USER") != nil {
-		config.DbUser = viper.GetString("DB_USER")
+	if viper.Get("MONGODB_USER") != nil {
+		config.DbUser = viper.GetString("MONGODB_USER")
 	}
-	if viper.Get("PASSWORD") != nil {
-		config.DbPassword = viper.GetString("PASSWORD")
+	if viper.Get("MONGODB_PASSWORD") != nil {
+		config.DbPassword = viper.GetString("MONGODB_PASSWORD")
 	}
-	if viper.Get("HOST_URL") != nil {
-		config.DbHost = viper.GetString("HOST_URL")
+	if viper.Get("MONGODB_HOST") != nil {
+		config.DbHost = viper.GetString("MONGODB_HOST")
 	}
 
 	return config

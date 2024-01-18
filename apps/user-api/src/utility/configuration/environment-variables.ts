@@ -3,13 +3,13 @@ import { z } from 'zod';
 
 export const EnvVariableSchema = BaseConfigSchema.extend({
   DATABASE: z.object({
-    HOST_URL: z
+    MONGODB_HOST: z
       .string()
       .url('Host must contain a valid url.')
       .includes(':', { message: 'please specify port.' }),
-    DB_NAME: z.string().min(2),
-    DB_USER: z.string().min(4),
-    PASSWORD: z.string().min(4),
+    MONGODB_DBNAME: z.string().min(2),
+    MONGODB_USER: z.string().min(4),
+    MONGODB_PASSWORD: z.string().min(4),
   }),
   REDIS: z.object({
     REDIS_HOST: z.string(),

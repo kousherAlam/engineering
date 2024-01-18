@@ -3,6 +3,42 @@
 # docker-compose up - run all service
 
 services:
+  user-api:
+    build:
+      context: .
+      dockerfile: apps/user-api/Dockerfile
+    ports:
+      - '9000:9000'
+    environment:
+      - NODE_ENV=prod
+      - PORT=9000
+      - NAME=UserAPI
+      - MONGODB_HOST=localhost:27017
+      - MONGODB_DBNAME=users
+      - MONGODB_USER=user
+      - MONGODB_PASSWORD=password
+      - SWAGGER_PATH=swagger
+      - API_PREFIX=api
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - mongodb
+      - redis
+    networks:
+      - backend
+  worker:
+    build:
+      context: .
+      dockerfile: stats-worker/Dockerfile
+    environment:
+      - HOST_URL=localhost:27017
+      - DB_NAME=users
+      - DB_USER=user
+      - PASSWORD=password
+    depends_on:
+      - mongodb
+    networks:
+      - backend
   mongodb:
     image: mongo:7.0.1-jammy
     environment:
