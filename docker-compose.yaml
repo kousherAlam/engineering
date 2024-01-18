@@ -31,10 +31,10 @@ services:
       context: .
       dockerfile: stats-worker/Dockerfile
     environment:
-      - HOST_URL=localhost:27017
-      - DB_NAME=users
-      - DB_USER=user
-      - PASSWORD=password
+      - MONGODB_HOST=mongodb:27017
+      - MONGODB_DBNAME=users
+      - MONGODB_USER=user
+      - MONGODB_PASSWORD=password
     depends_on:
       - mongodb
     networks:
