@@ -1,6 +1,9 @@
 # Dist files
 dist 
 
+## docker 
+mongo
+
 
 # Logs
 logs

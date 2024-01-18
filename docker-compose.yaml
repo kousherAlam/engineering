@@ -10,10 +10,10 @@ services:
     ports:
       - '9000:9000'
     environment:
-      - NODE_ENV=prod
+      - NODE_ENV=dev
       - PORT=9000
       - NAME=UserAPI
-      - MONGODB_HOST=localhost:27017
+      - MONGODB_HOST=mongodb:27017
       - MONGODB_DBNAME=users
       - MONGODB_USER=user
       - MONGODB_PASSWORD=password
