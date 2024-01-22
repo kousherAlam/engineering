@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"sync"
 	"time"
@@ -10,6 +11,11 @@ import (
 	"github.com/kousheralam/stats-worker/database"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+)
+
+var (
+	ErrNotFound  = errors.New("not found any status")
+	ErrNotExists = errors.New("no user exists")
 )
 
 func main() {
