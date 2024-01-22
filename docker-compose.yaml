@@ -41,6 +41,7 @@ services:
       - backend
   mongodb:
     image: mongo:7.0.1-jammy
+    restart: unless-stopped
     environment:
       MONGO_INITDB_ROOT_USERNAME: user
       MONGO_INITDB_DATABASE: users
@@ -53,7 +54,7 @@ services:
       - backend
   redis:
     image: redis:7.0-alpine3.18
-    restart: always
+    restart: unless-stopped
     ports:
       - '6379:6379'
     command: ["redis-server", "--appendonly", "yes"]
@@ -63,7 +64,7 @@ services:
       - backend
   redis-commander:
     image: rediscommander/redis-commander:latest
-    restart: always
+    restart: unless-stopped
     environment:
       - REDIS_HOSTS=local:redis:6379
       - HTTP_USER=root
