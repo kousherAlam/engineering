@@ -1,9 +1,10 @@
-FROM golang:1.21.6 as builder
+FROM alpine:3.19.0 as builder
 WORKDIR /build
-COPY ./stats-worker ./code
+RUN apk add --no-cache go gcc g++
+COPY ./docker-go ./code
 WORKDIR /build/code
 RUN go mod tidy
-RUN env GOOS=linux GOARCH=amd64 go build -o /build/worker .
+RUN env CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o /build/worker .
 
 FROM alpine:3.19.0
 WORKDIR /build 
