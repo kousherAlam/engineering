@@ -1,3 +1,7 @@
+### Issues found
+
+- When building multistage docker image for go `alpine` and `go` docker image has different directory structure, `lib64` and `lib` thus `CGO_ENABLED=1` is not both platform compatible, but `CGO_ENABLED=0` are.
+
 ## How to run the project
 
 - copy the example.env to .env file in the root of the project
