@@ -1,0 +1,8 @@
+#exclude certificate file
+*.pem
+*.cert 
+*.cer
+*.crt
+*.key
+*.csr
+

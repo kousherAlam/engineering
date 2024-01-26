@@ -1,3 +1,6 @@
 go 1.21.6
 
-use ./stats-worker
+use (
+	./pki
+	./stats-worker
+)
